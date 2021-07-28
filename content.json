@@ -16,7 +16,11 @@
         "North Carolwood Drive",
         "Holmby Hills neighborhood of Los Angeles"
       ],
-      "images": []
+      "images": [
+        "https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/7S4PPUCBGII6TERMMTLLPBALQI.jpg",
+        "https://www.washingtonpost.com/resizer/KJZwKDVKAJYppDOm9TjWeGlXh9g=/arc-anglerfish-washpost-prod-washpost/public/7S4PPUCBGII6TERMMTLLPBALQI.jpg"
+      ],
+      "googleSearchQuery": "Michael Jackson American singer Michael Jackson"
     },
     {
       "text": "Physician Conrad Murray said that he found Jackson in his room not breathing and with a weak pulse; he administered CPR to no avail, and security called 9-1-1 at 12:21 p.m. PDT (UTC–7) Paramedics treated Jackson at the scene, but he was pronounced dead at the Ronald Reagan UCLA Medical Center",
@@ -34,7 +38,11 @@
         "scene",
         "breathing"
       ],
-      "images": []
+      "images": [
+        "https://thesource.com/wp-content/uploads/2018/07/Dr-Conrad-Murray-Michael-Jackson-Joe-Jackson.jpg",
+        "https://media.washtimes.com/media/image/2011/11/07/michael-jackson-docto_star.jpg"
+      ],
+      "googleSearchQuery": "Michael Jackson Physician Conrad Murray"
     },
     {
       "text": "On August 28, 2009, the Los Angeles County Coroner concluded that Jackson's death was a homicide.",
@@ -44,7 +52,11 @@
         "Jackson's death",
         "August"
       ],
-      "images": []
+      "images": [
+        "https://www.washingtonpost.com/resizer/KJZwKDVKAJYppDOm9TjWeGlXh9g=/arc-anglerfish-washpost-prod-washpost/public/7S4PPUCBGII6TERMMTLLPBALQI.jpg",
+        "https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/7S4PPUCBGII6TERMMTLLPBALQI.jpg"
+      ],
+      "googleSearchQuery": "Michael Jackson Los Angeles County Coroner"
     },
     {
       "text": "Jackson had been administered propofol and anti-anxiety benzodiazepines lorazepam and midazolam by his doctor.",
@@ -54,7 +66,11 @@
         "propofol",
         "doctor"
       ],
-      "images": []
+      "images": [
+        "https://1.bp.blogspot.com/-MXOuvjmVgxk/W_DjotVXMBI/AAAAAAAA5KI/CMbJSFCxY1Y8V0L3IKnxLi7QodufTSz2wCLcBGAs/s1600/1a1.jpeg",
+        "https://patentimages.storage.googleapis.com/3b/1a/4a/1609c6b97fcf9c/US6048857-drawings-page-3.png"
+      ],
+      "googleSearchQuery": "Michael Jackson anti-anxiety benzodiazepines lorazepam"
     },
     {
       "text": "Murray was convicted of involuntary manslaughter in 2011, and served two years of his four-year prison sentence with time off for good behavior",
@@ -65,7 +81,11 @@
         "Murray",
         "time"
       ],
-      "images": []
+      "images": [
+        "https://arc-anglerfish-arc2-prod-sltrib.s3.amazonaws.com/public/A737O6GH5VEHBEEY6JJ2STIUQQ.jpg",
+        "http://resizer.shared.arcpublishing.com/LHHRTjpXCSUD-ldFYywJHO3bVkw=/arc-anglerfish-arc2-prod-sltrib/public/A737O6GH5VEHBEEY6JJ2STIUQQ.jpg"
+      ],
+      "googleSearchQuery": "Michael Jackson involuntary manslaughter"
     },
     {
       "text": "Jackson's death triggered reactions around the world, creating unprecedented surges of Internet traffic and dramatically boosting sales of his music.",
@@ -76,7 +96,11 @@
         "world",
         "sales of his music"
       ],
-      "images": []
+      "images": [
+        "https://s2.r29static.com/bin/entry/c3f/x,80/2208446/image.jpg",
+        "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2019%2F06%2Fparis-prince-bigi-jackson-2000.jpg"
+      ],
+      "googleSearchQuery": "Michael Jackson Jackson's death"
     },
     {
       "text": "He had been preparing for a series of comeback concerts at London's O2 Arena from July 2009 to March 2010.",
@@ -86,7 +110,11 @@
         "March",
         "July"
       ],
-      "images": []
+      "images": [
+        "https://s2.r29static.com/bin/entry/c3f/x,80/2208446/image.jpg",
+        "https://pagesix.com/wp-content/uploads/sites/3/2018/07/janet-jackson-comeback-performance.jpg?quality=80&strip=all"
+      ],
+      "googleSearchQuery": "Michael Jackson series of comeback concerts"
     }
   ]
 }

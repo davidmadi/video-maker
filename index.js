@@ -7,12 +7,12 @@ const robots = {
 }
 
 async function start(){
-  //robots.input()
-  //await robots.text()
+  robots.input()
+  await robots.text()
   await robots.images()
 
   const content = robots.state.load();
-  console.log(JSON.stringify(content));
+  //console.log(JSON.stringify(content));
 }
 
 start();

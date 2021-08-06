@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+content/
+credentials/
+templates/1/template.aep Logs
+templates/1/Adobe After Effects Auto-Save

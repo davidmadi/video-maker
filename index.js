@@ -9,10 +9,10 @@ const robots = {
 }
 
 async function start(){
-  //robots.input()
-  //await robots.text()
-  //await robots.images()
-  //await robots.video();
+  robots.input()
+  await robots.text()
+  await robots.images()
+  await robots.video();
   await  robots.youtube();
   console.log("> End");
 }

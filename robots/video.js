@@ -1,29 +1,16 @@
-const imageDownloader = require('image-downloader')
-const google = require('googleapis').google;
-const customsearch = google.customsearch('v1');
 const gm = require('gm').subClass({imageMagick:true});
+const spawn = require('child_process').spawn;
+const path = require('path');
+const rootPath = path.resolve(__dirname, '..'); 
 const state = require("./state.js");
-const robots = {
-  state : require('./state.js')
-}
-const googleSearchCredentials = require('../credentials/google-search.json');
-const videoshow = require("videoshow");
-const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
-const ffprobePath = require("@ffprobe-installer/ffprobe").path;
-let ffmpeg = require("fluent-ffmpeg");
-ffmpeg.setFfmpegPath(ffmpegPath);
-ffmpeg.setFfprobePath(ffprobePath);
 
 async function robot(){
-  const content = robots.state.load();
+  const content = state.load();
   //await convertAllImages(content);
   //await createAllSentenceImages(content);
   //await createYoutubeThumbnail();
-  await createAfterEffectsScript(content);
-  //await renderVideoWithAfterEffects();
-
-  //console.dir(content, { depth:null});
-  //process.exit(0);
+  //await createAfterEffectsScript(content);
+  await renderVideoWithAfterEffects();
 }
 
 async function convertAllImages(content){
@@ -106,30 +93,23 @@ async function createAfterEffectsScript(content) {
 
 async function renderVideoWithAfterEffects() {
   return new Promise((resolve, reject) => {
-    const systemPlatform=os.platform
-    
-    if (systemPlatform== 'darwin'){
-      const aerenderFilePath = '/Applications/Adobe After Effects CC 2019/aerender'
-    }else if (systemPlatform=='win32'){
-      const aerenderFilePath = '%programfiles%\Adobe\Adobe After Effects CC\Arquivos de suporte\aerender.exe'
-    }else{
-      return reject(new Error('System not Supported'))
-    }
-    
-    const templateFilePath = fromRoot('./templates/1/template.aep')
-    const destinationFilePath = fromRoot('./content/output.mov')
+    const aerenderFilePath = `/Applications/Adobe After Effects 2020/aerender`;
+    const templateFilePath = `${rootPath}/templates/1/template.aep`;
+    const destinationFilePath = `${rootPath}/content/output.mov`;
 
-    console.log('> [video-robot] Starting After Effects')
+    console.log(`${rootPath}/templates/1/template.aep`);
+    console.log('> [video-robot] Starting After Effects');
 
     const aerender = spawn(aerenderFilePath, [
       '-comp', 'main',
       '-project', templateFilePath,
-      '-output', destinationFilePath
-    ])
+      '-output', destinationFilePath,
+      '-reuse'
+    ]);
 
     aerender.stdout.on('data', (data) => {
       process.stdout.write(data)
-    })
+    });
 
     aerender.on('close', () => {
       console.log('> [video-robot] After Effects closed')

@@ -9,15 +9,12 @@ const googleSearchCredentials = require('../credentials/google-search.json');
 
 async function robot(){
   const content = robots.state.load();
-  //const images = await fetchImagesForAllSentences(content);
-  //robots.state.save(content);
+  const images = await fetchImagesForAllSentences(content);
+  robots.state.save(content);
 
-  //await downloadAllImages(content);
-  //await createAllSentenceImages(content);
+  await downloadAllImages(content);
+  await createAllSentenceImages(content);
   await createYoutubeThumbnail();
-
-  //console.dir(content, { depth:null});
-  process.exit(0);
 }
 
 async function fetchImagesForAllSentences(content){

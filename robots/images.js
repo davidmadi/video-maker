@@ -9,16 +9,13 @@ const googleSearchCredentials = require('../credentials/google-search.json');
 
 async function robot(){
   const content = robots.state.load();
-  //const images = await fetchImagesForAllSentences(content);
-  //robots.state.save(content);
+  const images = await fetchImagesForAllSentences(content);
+  robots.state.save(content);
 
-  //await downloadAllImages(content);
-  //await convertAllImages(content);
-  //await createAllSentenceImages(content);
-  await createYoutubeThumbnail();
+  await downloadAllImages(content);
+  await convertAllImages(content);
+  await createAllSentenceImages(content);
 
-  //console.dir(content, { depth:null});
-  process.exit(0);
 }
 
 async function fetchImagesForAllSentences(content){
@@ -74,6 +71,7 @@ async function downloadAndSave(url, fileName){
     dest: `./content/${fileName}`
   })
 }
+
 
 async function convertAllImages(content){
   for(let sentenceIndex=0; sentenceIndex < content.sentences.length; sentenceIndex++){
@@ -170,18 +168,6 @@ async function createSentenceImage(sentenceIndex, text){
       console.log(`> Sentence created ${outputFile}`);
       resolve();
     })
-  });
-}
-
-async function createYoutubeThumbnail(){
-  return new Promise((resolve,reject)=>{
-    gm()
-    .in('./content/0-converted.png')
-    .write('./content/youtube-thumbnail.png', (error)=>{
-      if (error) return reject(error);
-      console.log(`> Creating youtube thumbnail`);
-      resolve();
-    });
   });
 }
 

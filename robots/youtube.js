@@ -14,13 +14,64 @@ async function robot() {
   await uploadThumbnail(videoInformation)
 
   async function authenticateWithOAuth() {
-    const webServer = await startWebServer()
-    const OAuthClient = await createOAuthClient()
-    requestUserConsent(OAuthClient)
-    const authorizationToken = await waitForGoogleCallback(webServer)
-    await requestGoogleForAccessTokens(OAuthClient, authorizationToken)
+    let channelAuthorization = await loadCachedYoutubeAuthorization();
+    const OAuthClient = await createOAuthClient();
+    if (!channelAuthorization){
+      const webServer = await startWebServer()
+      requestUserConsent(OAuthClient)
+      const authorizationToken = await waitForGoogleCallback(webServer);
+      channelAuthorization = await fetchRenewToken(authorizationToken);
+      await writeAuthFile(channelAuthorization);
+      await stopWebServer(webServer)
+    }
+    await fetchNewFreshToken(OAuthClient, channelAuthorization);
+    //await requestGoogleForAccessTokens(OAuthClient, authorizationToken)
+    await requestGoogleForAccess(OAuthClient);
     await setGlobalGoogleAuthentication(OAuthClient)
-    await stopWebServer(webServer)
+
+    async function requestGoogleForAccess(OAuthClient){
+      await OAuthClient.getAccessToken();
+    }
+
+    function fetchNewFreshToken(OAuthClient, channelAuthorization){
+      return new Promise(async (resolve,reject)=>{
+        OAuthClient.credentials.refresh_token = channelAuthorization.refresh_token;  
+        const authorizationToken = await OAuthClient.getRequestHeaders();
+        resolve(authorizationToken);
+      });
+    }
+
+    function fetchRenewToken(authorizationToken){
+      return new Promise(async (resolve,reject)=>{
+        const access = await OAuthClient.getToken(authorizationToken);//get access token
+        if (access && access.tokens && access.tokens.refresh_token)
+          return resolve(access.tokens);
+        reject("Usuario nao permitiu acesso ao canal do youtube.")
+      });
+    }
+
+    function loadCachedYoutubeAuthorization(){
+      return new Promise((resolve)=>{
+        fs.readFile('./credentials/youtube-authorization.json', 'utf-8', (err, data)=>{
+          if (err){
+            return resolve(false);
+          }
+          else{
+            resolve(JSON.parse(data));
+          }
+        });
+      });
+    }
+
+    function writeAuthFile(authorizationResult){
+      return new Promise((resolve,reject)=>{
+        const jsonAuth = JSON.stringify(authorizationResult);
+        fs.writeFile('./credentials/youtube-authorization.json', jsonAuth, function (err) {
+          if (err) return reject(console.log(err));
+          resolve();
+        });
+      });
+    }
 
     async function startWebServer() {
       return new Promise((resolve, reject) => {
@@ -40,15 +91,16 @@ async function robot() {
 
     async function createOAuthClient() {
       const credentials = require('../credentials/google-youtube.json')
-
       const OAuthClient = new OAuth2(
         credentials.web.client_id,
         credentials.web.client_secret,
         credentials.web.redirect_uris[0]
-      )
-
+      );
       return OAuthClient
     }
+
+    //{"authorizationToken":"4/0AX4XfWgpPdSkcYA9nj7Dz25MEMU4txNYFZ2XEYt5z4z_yld8ABmIhph7db8Rpwc_nmrYNw"}
+    //{"authorizationToken":"4/0AX4XfWhzAiIyWJQuDfrkNqgxxaPMO3LaLVE2Vj5KqZAgG0tBOr-_wRaSjiGVIFxiOhj4Jg"}
 
     function requestUserConsent(OAuthClient) {
       const consentUrl = OAuthClient.generateAuthUrl({

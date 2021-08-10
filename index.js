@@ -15,6 +15,7 @@ async function start(){
   await robots.video();
   await  robots.youtube();
   console.log("> End");
+  process.exit();
 }
 
 
